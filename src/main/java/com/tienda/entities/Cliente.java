@@ -41,14 +41,14 @@ public class Cliente implements Serializable{
     private String segundoApellido;
     
     @Size(max = 25)
-    @Column(name = "dui_cliente")
+    @Column(name = "dui_cliente",unique = true)
     private String duiCliente;
     
     @Size(max = 25)
     @Column(name = "nit_cliente",unique = true)
     private String nitCliente;
     
-    @Column(name = "flag_estado",unique = true)
+    @Column(name = "flag_estado")
     private Integer flagEstado;
     
     @Column(name = "fecha_crea")
@@ -126,6 +126,21 @@ public class Cliente implements Serializable{
     public void setFechaCrea(Date fechaCrea) {
         this.fechaCrea = fechaCrea;
     }
+    
+    public String getClienteNombreCompleto() {
+        StringBuilder sb = new StringBuilder(this.primerNombre);
+        sb.append(" ").append(this.segundoNombre != null ? this.segundoNombre : "").append(" ");
+        sb.append(this.primerApellido).append(" ");
+        sb.append(" ").append(this.segundoApellido != null ? this.segundoApellido : "");
+        return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "idCliente=" + idCliente + ", primerNombre=" + primerNombre + ", segundoNombre=" + segundoNombre + ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + ", duiCliente=" + duiCliente + ", nitCliente=" + nitCliente + ", flagEstado=" + flagEstado + ", fechaCrea=" + fechaCrea + '}';
+    }
+
+   
     
     
 }
